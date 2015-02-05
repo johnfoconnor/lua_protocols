@@ -1,4 +1,5 @@
 local Enumerable = require 'enumerable'
+local Collectable = require 'collectable'
 local Iterator = require 'iterator'
 local Set = {}
 Set.__index = Set
@@ -70,4 +71,5 @@ end
 
 -- TODO make this data driven by taking the protocol impl as an arg
 Enumerable:_impl(Set)
+Collectable:_impl(Set)
 return Set

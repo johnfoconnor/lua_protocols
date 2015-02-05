@@ -2,7 +2,7 @@ local Enum = {}
 Enum.__index = Enum
 
 function Enum.count(enumerable)
-    assert(enumerable.__protocols["enumerable"], "not enumerable")
+    Enumerable.is_defined_for(enumerable)
     local reducer = function(x, acc)
         return "cont", acc + 1
     end
@@ -11,6 +11,7 @@ function Enum.count(enumerable)
 end
 
 function Enum.foldl(enumerable, acc, fun)
+    Enumerable.is_defined_for(enumerable)
     local reducer = function(x, acc)
         return "cont", fun(x, acc)
     end
@@ -25,6 +26,8 @@ local into = function(enumerable, initial, fun, callback)
 end
 
 function Enum.into(enumerable, collectable, fun)
+    Enumerable.is_defined_for(enumerable)
+    Collectable.is_defined_for(collectable)
     local initial, collectable_fun = collectable:into()
     local callback = function(x, acc)
         return collectable_fun(acc, "cont", fun(x))

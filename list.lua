@@ -1,4 +1,5 @@
 local Enumerable = require 'enumerable'
+local Collectable = require 'collectable'
 local Iterator = require 'iterator'
 local List = {}
 List.__index = List
@@ -56,4 +57,5 @@ function List.do_reduce(iter, reducer, cmd, acc)
 end
 
 Enumerable:_impl(List)
+Collectable:_impl(List)
 return List

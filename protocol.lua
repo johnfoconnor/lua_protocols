@@ -20,6 +20,13 @@ function Protocol._enable_protocol(protocol, class)
 end
 
 
+function Protocol.is_defined_for(name, class)
+    assert(class.__protocols and class.__protocols[name],
+           tostring(class) .. " is not " .. name)
+    return true
+end
+
+
 -- create a Protocol with `name`
 function Protocol.new(name, spec)
     assert(type(name) == "string", "protocol name must be a string")
@@ -27,8 +34,12 @@ function Protocol.new(name, spec)
     local protocol = {}
     protocol.name = name
     protocol.spec = spec
+    protocol.is_defined_for = function(class)
+        return Protocol.is_defined_for(name, class)
+    end
     setmetatable(protocol, {__index = Protocol})
     return protocol
 end
+
 
 return Protocol

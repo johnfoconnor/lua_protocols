@@ -3,5 +3,8 @@ local Protocol = require 'protocol'
 local spec = {
     "reduce"
 }
+local name = "enumerable"
 
-return Protocol.new("enumerable", spec)
+local Enumerable = Protocol.new(name, spec)
+
+return Enumerable
